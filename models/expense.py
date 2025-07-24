@@ -19,9 +19,18 @@ class ExpenseSheetInheritance(models.Model):
         self.state = 'head_approve'
 
     def act_submit_to_hr(self):
-        self.state = 'hr_approve'
+        if self.user_id:
+            if self.user_id.id == self.env.user.id:
+                self.state = 'hr_approve'
+            else:
+                raise UserError("Only the employee's manager can approve this request.")
+        else:
+            raise UserError("The employee does not have a manager assigned.")
 
     def act_submit_to_accounts(self):
+        self.state = 'accounts_approve'
+
+    def act_accounts_approve(self):
         self.state = 'approve'
 
 
@@ -80,4 +89,3 @@ class ExpenseInheritance(models.Model):
                 'state': 'draft',
             })
         return values
-

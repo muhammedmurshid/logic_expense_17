@@ -13,6 +13,8 @@
         'base', 'hr', 'hr_expense'
     ],
     'data': [
+        'security/groups.xml',
+        'security/rules.xml',
         'views/expense.xml'
     ],
     'installable': True,
