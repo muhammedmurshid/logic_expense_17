@@ -3,10 +3,11 @@
     <record id="expense_base_users_record_rule" model="ir.rule">
         <field name="name">User can see their own records rule</field>
         <field name="model_id" ref="model_hr_expense"/>
-        <field name="groups" eval="[(4, ref('logic_expense_17.group_hr_expense_base_users'))]"/>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         <field name="domain_force">['|',('create_uid', '=', user.id),('employee_id.user_id', '=', user.id)]
         </field>
     </record>
+
     <record id="expense_accounts_record_rule" model="ir.rule">
         <field name="name">All Records Visible</field>
         <field name="model_id" ref="model_hr_expense"/>
@@ -17,6 +18,7 @@
         <field name="perm_create" eval="1"/>
         <field name="perm_unlink" eval="1"/>
     </record>
+
     <record id="expense_accounts_manager_full_access" model="ir.rule">
         <field name="name">Full Access for Expense Accounts Manager</field>
         <field name="model_id" ref="model_hr_expense"/>
