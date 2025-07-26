@@ -37,6 +37,12 @@ class ExpenseSheetInheritance(models.Model):
 class ExpenseInheritance(models.Model):
     _inherit = 'hr.expense'
 
+    expense_type = fields.Selection([('traval', 'Traval'), ('other', 'Other')], default='traval', required=True)
+    mode_of_travel = fields.Selection([('bus','Bus'), ('train','Train'),('car','Car'), ('bike','Bike'), ('auto','Auto'),('other','Other')], default='bus', string="Mode of Travel")
+    from_location =fields.Char(string="From Location")
+    destination_location = fields.Char(string="Destination Location")
+    km_travel = fields.Integer(string="KM Travel")
+
     def _get_default_expense_sheet_values(self):
         expenses_with_amount = self.filtered(lambda expense: not (
                 expense.currency_id.is_zero(expense.total_amount_currency)

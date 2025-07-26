@@ -17,8 +17,18 @@
             <xpath expr="//field[@name='tax_amount_currency']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="expense_type"/>
+                <field name="mode_of_travel" invisible="expense_type == 'other'"/>
+                <field name="from_location" invisible="expense_type == 'other'"/>
+                <field name="from_location" invisible="expense_type == 'other'"/>
+                <field name="destination_location" invisible="expense_type == 'other'"/>
+                <field name="km_travel" invisible="expense_type == 'other'"/>
+
+            </xpath>
         </field>
     </record>
+
     <record id="hr_expense.view_hr_expense_sheet_form" model="ir.ui.view">
         <field name="name">hr.expense.sheet.form</field>
         <field name="model">hr.expense.sheet</field>
@@ -44,9 +54,11 @@
                     <button name="act_submit_to_hr" string="Head Approval" type="object"
                             invisible="state != 'head_approve'" class="oe_highlight"/>
                     <button name="act_submit_to_accounts" string="HR Approval" type="object"
-                            invisible="state != 'hr_approve'" class="oe_highlight" groups="logic_expense_17.group_hr_expense_hr_manager"/>
+                            invisible="state != 'hr_approve'" class="oe_highlight"
+                            groups="logic_expense_17.group_hr_expense_hr_manager"/>
                     <button name="act_accounts_approve" string="Accounts Approve" type="object"
-                            invisible="state != 'accounts_approve'" class="oe_highlight" groups="logic_expense_17.group_hr_expense_accounts_manager"/>
+                            invisible="state != 'accounts_approve'" class="oe_highlight"
+                            groups="logic_expense_17.group_hr_expense_accounts_manager"/>
                     <button name="action_approve_expense_sheets"
                             string="Approve"
                             type="object"
