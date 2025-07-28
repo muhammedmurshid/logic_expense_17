@@ -10,12 +10,14 @@
     'category': 'Specific Category',
     'license': 'LGPL-3',
     'depends': [
-        'base', 'hr', 'hr_expense'
+        'base', 'mail', 'logic_payments_17', 'account', 'openeducat_core'
     ],
     'data': [
         'security/groups.xml',
-        'security/rules.xml',
-        'views/expense.xml'
+        'security/ir.model.access.csv',
+        'security/user_rules.xml',
+        'views/cancallation_wizard.xml',
+        'views/expense_form_view.xml'
     ],
     'installable': True,
     'application': False,
