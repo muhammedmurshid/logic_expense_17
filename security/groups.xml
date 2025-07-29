@@ -9,6 +9,10 @@
         <field name="name">HR Manager</field>
         <field name="category_id" ref="logic_expense_17.logic_expense_groups"/>
     </record>
+    <record id="logic_expense_base_users" model="res.groups">
+        <field name="name">Base Users</field>
+        <field name="category_id" ref="logic_expense_17.logic_expense_groups"/>
+    </record>
     <record id="accounts_logic_expense" model="res.groups">
         <field name="name">Accounts Manager</field>
         <field name="category_id" ref="logic_expense_17.logic_expense_groups"/>

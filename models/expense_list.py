@@ -6,7 +6,7 @@ class ExpenseListForm(models.Model):
     _description = 'Expense List'
 
     expense_date = fields.Date('Expense Date', required=True)
-    purpose = fields.Char(string="Purpose")
+    purpose = fields.Char(string="Purpose", required=1)
     total_expense = fields.Float(string='Total Expense')
     expense_type = fields.Selection([
         ('travel', 'Travel'), ('other', 'Other')
@@ -19,6 +19,8 @@ class ExpenseListForm(models.Model):
     # state = fields.Char(related="exp_id.state")
     from_location = fields.Char(string='From Location')
     destination = fields.Char(string='Destination')
+    recipient_name = fields.Char(string="Recipient Name", help="Name of destination")
+    recipient_reference = fields.Char(string="Reference Number", widget="phone", help="Identifier or number")
     attach_ticket = fields.Binary(string='Attach Ticket')
     currency_id = fields.Many2one('res.currency', string='Currency', default=lambda self: self.env.company.currency_id)
 

@@ -69,11 +69,12 @@ class LogicExpenseForm(models.Model):
         self.write({'state': 'draft'})
 
     def action_head_approval(self):
-        if self.employee_id.parent_id.user_id.id == self.env.user.id or self.employee_id.in_charge_id.user_id.id == self.env.user.id:
+        if self.employee_id.parent_id.user_id.id == self.env.user.id or self.employee_id.coach_id.user_id.id == self.env.user.id:
             activity_id = self.env['mail.activity'].search(
                 [('res_id', '=', self.id), ('user_id', '=', self.env.user.id), (
                     'activity_type_id', '=', self.env.ref('logic_expense_17.mail_logic_expenses').id)])
-            activity_id.action_feedback(feedback=f'expense request approved.')
+            if activity_id:
+                activity_id.action_feedback(feedback=f'expense request approved.')
             user_id = self.env.ref('logic_expense_17.hr_manager_logic_base').users
             for j in user_id:
                 self.activity_schedule('logic_expense_17.mail_logic_expenses', user_id=j.id,
@@ -94,7 +95,8 @@ class LogicExpenseForm(models.Model):
         activity_id = self.env['mail.activity'].search(
             [('res_id', '=', self.id), ('user_id', '=', self.env.user.id), (
                 'activity_type_id', '=', self.env.ref('logic_expense_17.mail_logic_expenses').id)])
-        activity_id.action_feedback(feedback=f'expense request approved.')
+        if activity_id:
+            activity_id.action_feedback(feedback=f'expense request approved.')
 
         user_id = self.env.ref('logic_expense_17.accounts_logic_expense').users
         for j in user_id:
@@ -106,7 +108,8 @@ class LogicExpenseForm(models.Model):
         activity_id = self.env['mail.activity'].search(
             [('res_id', '=', self.id), ('user_id', '=', self.env.user.id), (
                 'activity_type_id', '=', self.env.ref('logic_expense_17.mail_logic_expenses').id)])
-        activity_id.action_feedback(feedback=f'expense request approved.')
+        if activity_id:
+            activity_id.action_feedback(feedback=f'expense request approved.')
         self.env['payment.request'].sudo().create({
             'source_type': 'expenses',
             'expense_rec_id': self.id,
@@ -145,18 +148,12 @@ class ExpenseSelection(models.Model):
     )
     expense_rec_id = fields.Many2one('logic.expenses', string='Expense Source')
 
-
 class AccountPaymentInheritExpense(models.Model):
     _inherit = "account.payment"
 
     def action_post(self):
         result = super(AccountPaymentInheritExpense, self).action_post()
         if self.payment_request_id:
-            # self.payment_request_id.sudo().write({
-            #     'state': 'paid',
-            #     'payment_date': datetime.today()
-            # })
-
             if self.payment_request_id.expense_rec_id:
                 self.payment_request_id.expense_rec_id.sudo().write({
                     'state': 'paid',
@@ -178,5 +175,6 @@ class ExpenseCancellation(models.TransientModel):
         activity_id = self.env['mail.activity'].search(
             [('res_id', '=', self.record_id.id), ('user_id', '=', self.env.user.id), (
                 'activity_type_id', '=', self.env.ref('logic_expense_17.mail_logic_expenses').id)])
-        activity_id.action_feedback(feedback=f'{self.description}. so your request is rejected.')
+        if activity_id:
+            activity_id.action_feedback(feedback=f'{self.description}. so your request is rejected.')
         self.record_id.write({'state': 'cancel'})

@@ -78,12 +78,12 @@
 
                     <notebook>
                         <page string="Expenses" name="expenses">
-                            <field name="expense_ids" widget="one2many" invisible="state != 'draft'">
+                            <field name="expense_ids" widget="one2many" readonly="state != 'draft'">
                                 <tree string="Expense" editable="bottom">
                                     <field name="expense_date" optional="show"/>
-                                    <field name="purpose"/>
-                                    <field name="currency_id" invisible="1"/>
-                                    <field name="expense_type"/>
+                                    <field name="purpose" required="1"/>
+                                    <field name="currency_id" optional="hide"/>
+                                    <field name="expense_type" required="1"/>
                                     <field name="mode_of_travelling"
                                            invisible="expense_type != 'travel'"/>
                                     <field name="from_location"
@@ -96,6 +96,8 @@
 <!--                                           attrs="{'invisible': [('mode_of_travelling', 'not in', ['bus','train'])]}"/>-->
                                     <field name="km_travel"
                                            invisible="mode_of_travelling in ['bus','train']"/>
+                                    <field name="recipient_name" required="1"/>
+                                    <field name="recipient_reference" required="1"/>
                                     <field name="total_expense" widget="monetary"/>
                                 </tree>
                             </field>
