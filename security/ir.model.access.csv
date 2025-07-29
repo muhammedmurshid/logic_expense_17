@@ -1,6 +1,14 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_model_logic_expenses,access_details,model_logic_expenses,,1,1,1,1
-access_expense_list,access_details,model_expense_list,,1,1,1,1
+access_model_logic_expenses_base,access_details,model_logic_expenses,logic_expense_17.logic_expense_base_users,1,1,1,1
+access_expense_list_base,access_details,model_expense_list,logic_expense_17.logic_expense_base_users,1,1,1,1
 expense_wizard,expense_wizard,model_expense_cancellation_wizard,,1,1,1,1
 
+access_model_logic_expenses_hr,access_model_logic_expenses_hr,model_logic_expenses,logic_expense_17.hr_manager_logic_expense,1,1,1,1
+access_expense_list_hr,access_expense_list_hr,model_expense_list,logic_expense_17.hr_manager_logic_expense,1,1,1,1
+
+access_model_logic_expenses_accounts,access_model_logic_expenses_hr,model_logic_expenses,logic_expense_17.accounts_logic_expense,1,1,1,1
+access_expense_list_accounts,access_expense_list_hr,model_expense_list,logic_expense_17.accounts_logic_expense,1,1,1,1
+
+access_model_logic_expenses_admin,access_model_logic_expenses_admin,model_logic_expenses,logic_expense_17.admin_logic_expense,1,1,1,1
+access_expense_list_admin,access_expense_list_admin,model_expense_list,logic_expense_17.admin_logic_expense,1,1,1,1
