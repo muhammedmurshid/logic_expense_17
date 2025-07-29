@@ -75,7 +75,7 @@ class LogicExpenseForm(models.Model):
                     'activity_type_id', '=', self.env.ref('logic_expense_17.mail_logic_expenses').id)])
             if activity_id:
                 activity_id.action_feedback(feedback=f'expense request approved.')
-            user_id = self.env.ref('logic_expense_17.hr_manager_logic_base').users
+            user_id = self.env.ref('logic_expense_17.hr_manager_logic_expense').users
             for j in user_id:
                 self.activity_schedule('logic_expense_17.mail_logic_expenses', user_id=j.id,
                                        note=f'{self.employee_id.name} Expense approval request sent. please approve or reject.')
@@ -117,11 +117,11 @@ class LogicExpenseForm(models.Model):
             # 'state':'payment_request',
             'amount': self.total_cost,
             'description': self.description,
-            'account_name': self.employee_id.name_as_per_bank,
-            'account_no': self.employee_id.bank_acc_number,
-            'ifsc_code': self.employee_id.ifsc_code,
-            'bank_name': self.employee_id.bank_name,
-            'bank_branch': self.employee_id.branch_bank,
+            # 'account_name': self.employee_id.name_as_per_bank,
+            # 'account_no': self.employee_id.bank_acc_number,
+            # 'ifsc_code': self.employee_id.ifsc_code,
+            # 'bank_name': self.employee_id.bank_name,
+            # 'bank_branch': self.employee_id.branch_bank,
 
         })
         self.write({'state': 'register_payment'})

@@ -16,9 +16,9 @@
                     <button name="action_head_approval" type="object" string="Head Approve" invisible="state != 'head_approval'"
                             class="oe_highlight"/>
                     <button name="action_hr_approval" type="object" string="HR Approve" invisible="state != 'hr_approval'"
-                            class="oe_highlight" groups="logic_base.hr_manager_logic_base"/>
+                            class="oe_highlight" groups="logic_expense_17.hr_manager_logic_expense"/>
                     <button name="action_accounts_approval" type="object" string="Accounts Approve" class="oe_highlight"
-                            invisible="state != 'accounts_approval'" groups="logic_base.accounts_logic_base"/>
+                            invisible="state != 'accounts_approval'" groups="logic_expense_17.accounts_logic_expense"/>
                     <button name="action_reject" type="object" string="Reject"
                             invisible="state not in ['head_approval,hr_approval,accounts_approval']"/>
                     <button name="action_return_to_draft" type="object" string="Return to Draft"
@@ -153,16 +153,16 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-<!--    <record id="inherit_payment_request_form" model="ir.ui.view">-->
-<!--        <field name="name">expense.view.form.inherit</field>-->
-<!--        <field name="model">payment.request</field>-->
-<!--        <field name="inherit_id" ref="logic_payments.payment_request_form_view"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//field[@name='source_type']" position="after">-->
-<!--                <field name="expense_rec_id" invisible="source_type != 'expenses'"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="inherit_payment_request_form" model="ir.ui.view">
+        <field name="name">expense.view.form.inherit</field>
+        <field name="model">payment.request</field>
+        <field name="inherit_id" ref="logic_payments_17.payment_request_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='source_type']" position="after">
+                <field name="expense_rec_id" invisible="source_type != 'expenses'"/>
+            </xpath>
+        </field>
+    </record>
 
 
     <menuitem name="Logic Expenses"
@@ -170,13 +170,13 @@
               web_icon="logic_expense_17,static/description/icon.png"
               sequence="10"/>
 
-    <menuitem name="Expenses" id="expenses_logic_menu"
-              parent="expenses_logic_main_menu"
-              sequence="1"/>
+<!--    <menuitem name="Expenses" id="expenses_logic_menu"-->
+<!--              parent="expenses_logic_main_menu"-->
+<!--              sequence="1"/>-->
 
     <menuitem name="Expenses" id="expenses_logic_menu_sec"
               action="logic_expenses_action"
-              parent="expenses_logic_menu"
+              parent="expenses_logic_main_menu"
               sequence="1"/>
 
 </odoo>

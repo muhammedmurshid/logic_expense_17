@@ -17,7 +17,8 @@
         'security/ir.model.access.csv',
         'security/user_rules.xml',
         'views/cancallation_wizard.xml',
-        'views/expense_form_view.xml'
+        'views/expense_form_view.xml',
+        'data/activity.xml',
     ],
     'installable': True,
     'application': False,
